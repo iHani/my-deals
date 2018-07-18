@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { HomePage, AnotherPage, NotFoundPage } from '../components';
+import { HomePage, CategoryPage, NotFoundPage } from '../components';
 
 class AppRouter extends Component {
   render () {
@@ -15,13 +15,8 @@ class AppRouter extends Component {
             />
             <Route
               exact
-              path='/another-page'
-              component={AnotherPage}
-            />
-            <Route
-              exact
-              path='/another-page/:id'
-              component={AnotherPage}
+              path='/:category'
+              component={CategoryPage}
             />
             <Route component={NotFoundPage} />
           </Switch>
