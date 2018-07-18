@@ -51,3 +51,10 @@ footer p {
 .badge {
   border-radius: 0;
 }
+
+.red {
+  color: red;
+}
+.grey {
+  color: grey;
+}
