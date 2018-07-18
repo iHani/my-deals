@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FaPlus from 'react-icons/lib/fa/plus';
 
 const userIsSignedIn = false;
 
@@ -26,11 +27,21 @@ const Header = () => (
           <Link className="nav-link" to="/">Home</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/new-deal">+ New Deal</Link>
-        </li>
-      </ul>
-    </div>
-  </nav>
+          <Link className="nav-link" to="/new-deal">
+          <FaPlus/>New Deal
+        </Link>
+      </li>
+    </ul>
+    {!userIsSignedIn && <ul className="navbar-nav">
+      <li className="nav-item">
+        <Link className="nav-link" to="/signup">Sign up</Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/login">Login</Link>
+      </li>
+    </ul>}
+  </div>
+</nav>
 );
 
 export default Header;
