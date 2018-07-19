@@ -1,24 +1,19 @@
 import {
-  HELLO_REDUX,
-} from '../actions/notes';
+  FETCHED_DEALS,
+} from '../actions/deals';
 
-const deals = [
-  { dealId: 1, dealCategory: 'Travel', dealPartner: 'AlTayyar', dealPrice: 200, bgColor: 'bgRed' },
-  { dealId: 2, dealCategory: 'Hotel', dealPartner: 'Ritz', dealPrice: 2500, bgColor: 'bgBlue' },
-  { dealId: 3, dealCategory: 'Hotel', dealPartner: 'Hilton', dealPrice: 1500, bgColor: 'bgBlue' },
-  { dealId: 4, dealCategory: 'Rent', dealPartner: 'Theeb', dealPrice: 80, bgColor: 'bgOrange' },
-];
+const initState = {
+  list: [],
+}
 
-export default (state = deals, action) => {
-  const { note } = action;
-
+export default (state = initState, action) => {
+  const { list } = action;
   switch (action.type) {
-    case HELLO_REDUX :
+    case FETCHED_DEALS :
     return {
       ...state,
-      note
+      list
     };
-
     default:
     return state;
   }
