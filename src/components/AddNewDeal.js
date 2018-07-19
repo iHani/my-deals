@@ -10,12 +10,12 @@ class AddNewDeal extends Component {
     const deal = {
       category: category.value,
       partner: partner.value,
-      price: parseInt(price.value, 10),
+      price: price.value,
     }
     console.log('deal', deal);
   }
+
   render() {
-    console.log(this.props);
     return (
       <div>
         <Header />
@@ -35,7 +35,7 @@ class AddNewDeal extends Component {
             </div>
             <div className="form-group">
               <label>Price</label>
-              <input name="price" type="text" className="form-control"/>
+              <input name="price" type="number" className="form-control"/>
             </div>
             <div className="form-group text-center">
               <button type="submit" className="btn btn-info width-200 m-2">Create</button>
@@ -47,16 +47,10 @@ class AddNewDeal extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => ({
   state,
-  categories: state.categories,
+  categories: state.categories.list,
  });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // getNote: () => dispatch(helloRedux()),
-  }
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddNewDeal);
+export default connect(mapStateToProps)(AddNewDeal);

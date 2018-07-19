@@ -19,13 +19,13 @@ fetch(`${api}/deals`, { headers })
 
 //
 // POST
-// export const postPost = (post) => (
-//   fetch(`${api}/posts`, {
+// export const updateFilter = (filter) => (
+//   fetch(`${api}/categories/filter/${filter}`, {
 //     method: 'POST',
 //     headers: {
 //       ...headers
 //     },
-//     body: JSON.stringify({ ...post }),
+//     body: JSON.stringify({ filter }),
 //   })
 //   .then(res => res.json())
 // )
