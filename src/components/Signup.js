@@ -4,34 +4,45 @@ import Header from './Header';
 
 class Signup extends Component {
 
-  handleCreateNewDeal (event) {
-    event.preventDefault();
-    const { category, partner, price } = event.target;
-    const deal = {
-      category: category.value,
-      partner: partner.value,
-      price: parseInt(price.value, 10),
-    }
-    console.log('deal', deal);
+  state = {
+    disabled: true,
   }
 
-  render() {
+  handleSignin (event) {
+    event.preventDefault();
+    const { mobile, password } = event.target;
+    const newUser = {
+      mobile: mobile.value,
+      password: password.value,
+    }
+    console.log('newUser', newUser);
+  }
 
+  handleToggleCheck = () => this.setState(prevState => ({ disabled: !prevState.disabled }));
+
+  render() {
     return (
       <div>
         <Header />
-        <div className="offset-sm-3 col-sm-6 py-4">
-          <h3>Signup</h3>
+        <div className="offset-sm-4 col-sm-4 py-4">
+          <form onSubmit={this.handleSignin}>
+            <h1 className="h3 mb-3 font-weight-normal">Sign up</h1>
+            <label htmlFor="inputMobileNumber" className="sr-only">Mobile Number</label>
+            <input name="mobile" type="text" id="inputMobileNumber" className="form-control m-2" placeholder="+966 Saudi mobile number" required autoFocus />
+            <label htmlFor="inputPassword" className="sr-only">Password</label>
+            <input name="password" type="password" id="inputPassword" className="form-control m-2" placeholder="Password" required />
+            <div className="checkbox mb-3">
+              <label className="m-2">
+                <input type="checkbox" value="agreement" onChange={this.handleToggleCheck}/> Agreement
+              </label>
+            </div>
+            <button className="btn btn-lg btn-primary btn-block m-2" type="submit" disabled={this.state.disabled}>Sign Up</button>
+          </form>
         </div>
       </div>
     );
   }
 }
-
-
-const mapStateToProps = (state) => ({
-  state,
-});
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -39,4 +50,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(undefined, mapDispatchToProps)(Signup);
