@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Header from './Header';
 
 class AddNewDeal extends Component {
-
-  // componentDidMount () {
-  //   const { deals } = this.props.state || [];
-  //   const categories = [...new Set(deals.map(({ dealCategory }) => dealCategory))];
-  //   this.setState({ categories })
-  // }
 
   handleCreateNewDeal (event) {
     event.preventDefault();
@@ -48,7 +41,6 @@ class AddNewDeal extends Component {
               <button type="submit" className="btn btn-info width-200 m-2">Create</button>
             </div>
           </form>
-
         </div>
       </div>
     );
@@ -58,7 +50,7 @@ class AddNewDeal extends Component {
 
 const mapStateToProps = (state) => ({
   state,
-  categories: [...new Set(state.deals.map(({ dealCategory }) => dealCategory))]
+  categories: state.categories,
  });
 
 const mapDispatchToProps = (dispatch) => {

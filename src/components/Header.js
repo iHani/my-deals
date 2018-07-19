@@ -4,17 +4,6 @@ import FaPlus from 'react-icons/lib/fa/plus';
 
 const userIsSignedIn = false;
 
-const navbarLinks = [
-  { title: 'About', url: 'about' },
-  { title: 'Contact', url: 'contact' },
-];
-
-const categories = [
-  { title: 'All', url: '/all', numberOfPosts: 14, classNames: 'badge badge-light m-1 p-3 fs-100' },
-  { title: 'Hotels', url: '/hotels', numberOfPosts: 4, classNames: 'badge badge-primary m-1 p-3 fs-100' },
-  { title: 'Rent', url: '/rent', numberOfPosts: 3, classNames: 'badge badge-info m-1 p-3 fs-100' },
-  { title: 'Travel', url: '/travel', numberOfPosts: 7, classNames: 'badge badge-success m-1 p-3 fs-100' },
-];
 const Header = () => (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <Link className="navbar-brand" to="/">Deals Provider System</Link>
