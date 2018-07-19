@@ -14,8 +14,8 @@ class AddNewDeal extends Component {
     }
     console.log('deal', deal);
   }
+
   render() {
-    console.log(this.props);
     return (
       <div>
         <Header />
@@ -50,7 +50,7 @@ class AddNewDeal extends Component {
 
 const mapStateToProps = (state) => ({
   state,
-  categories: state.categories,
+  categories: state.categories.list,
  });
 
 const mapDispatchToProps = (dispatch) => {

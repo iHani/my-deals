@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { HomePage, NotFoundPage, AddNewDeal } from '../components';
+import { HomePage, NotFoundPage, AddNewDeal, Login, Signup } from '../components';
 
 class AppRouter extends Component {
   render () {
@@ -17,6 +17,16 @@ class AppRouter extends Component {
               exact
               path='/new-deal'
               component={AddNewDeal}
+            />
+            <Route
+              exact
+              path='/login'
+              component={Login}
+            />
+            <Route
+              exact
+              path='/signup'
+              component={Signup}
             />
             {/* <Route
               exact
