@@ -11,6 +11,8 @@ class HomePage extends Component {
     this.props.fetchDeals();
   }
 
+  // filterBy = (filteredBy) => this.setState({ filteredBy });
+
   filterDealsBy = (category) => {
     const deals = category === 'All' ? this.props.deals
     : this.props.deals.filter(({ dealCategory }) => dealCategory === category);
