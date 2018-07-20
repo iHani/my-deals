@@ -5,6 +5,7 @@ export const GET_CATEGORY_SET = 'GET_CATEGORY_SET';
 export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
 export const LOGOUT = 'LOGOUT';
 
+
 export const fetchDeals = () => (dispatch) => (
   DealsAPI
   .getDeals()

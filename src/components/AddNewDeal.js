@@ -24,7 +24,6 @@ class AddNewDeal extends Component {
 
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-
   render() {
     const { category, partner, price } = this.state;
     const { isAuthenticated } = this.props;
@@ -33,7 +32,7 @@ class AddNewDeal extends Component {
       return <NotAuthorized />
     }
 
-    return (
+     return (
       <div>
         <Header />
         <div className="offset-sm-3 col-sm-6 py-4">
@@ -69,6 +68,5 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.deals.isAuthenticated,
   categories: state.categories.list,
  });
-
 
 export default connect(mapStateToProps)(AddNewDeal);
