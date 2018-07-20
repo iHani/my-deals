@@ -4,6 +4,7 @@ import DealsList from './DealsList';
 import AddNewDeal from './AddNewDeal';
 import Login from './Login';
 import Signup from './Signup';
+import PrivateRoute from './PrivateRoute';
 import NotFoundPage from './NotFoundPage';
 
 export {
@@ -13,5 +14,6 @@ export {
   AddNewDeal,
   Login,
   Signup,
+  PrivateRoute,
   NotFoundPage,
 }
