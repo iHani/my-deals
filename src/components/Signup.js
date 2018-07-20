@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { authenticateUser } from '../actions/deals';
+import { signup } from '../actions/deals';
 import createHistory from 'history/createBrowserHistory';
 import Header from './Header';
 
@@ -22,10 +22,10 @@ class Signup extends Component {
         password: this.state.password,
       }
       console.log("New user", user);
-      const authenticate = await this.props.authenticateUser(user);
+      const authenticate = await this.props.signup(user);
       authenticate && this.props.history.push("/");
     } catch (error) {
-      console.log(error);
+      console.log('Error sign up:', error);
     }
   }
 
@@ -72,7 +72,7 @@ class Signup extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  authenticateUser: (user) => dispatch(authenticateUser(user)),
+  signup: (user) => dispatch(signup(user)),
 })
 
 export default connect(undefined, mapDispatchToProps)(Signup);

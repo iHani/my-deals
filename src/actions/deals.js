@@ -19,15 +19,21 @@ export const fetchedDeals = (list) => ({
   list
 });
 
-export const authenticateUser = (user) => (dispatch) => {
+export const signup = (user) => (dispatch) => {
   return DealsAPI
-  .auth(user)
+  .signup(user)
   .then(({ isAuthenticated }) => isAuthenticated && dispatch(userAuthenticated()))
 }
 
 export const userAuthenticated = () => ({
   type: USER_AUTHENTICATED,
 });
+
+// export const login = (user) => (dispatch) => {
+//   return DealsAPI
+//   .login(user)
+//   .then(({ isAuthenticated }) => isAuthenticated && dispatch(userAuthenticated()))
+// }
 
 export const logout = () => (dispatch) => {
   return DealsAPI

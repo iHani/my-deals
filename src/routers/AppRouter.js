@@ -6,7 +6,7 @@ import {
   Route,
   withRouter
 } from "react-router-dom";
-import { HomePage, NotFoundPage, AddNewDeal, Login, Signup, PrivateRoute } from '../components';
+import { HomePage, NotFoundPage, AddNewDeal, Login, Signup } from '../components';
 import { checkAuthUser } from '../actions/deals';
 
 const token = localStorage.token || undefined
@@ -25,7 +25,6 @@ class AppRouter extends Component {
             <Route path='/new-deal' component={AddNewDeal} />
             <Route path='/signup' component={Signup} />
             <Route path='/login' component={Login} />
-            {/* <PrivateRoute path='/new-deal' component={AddNewDeal} /> */}
             <Route component={NotFoundPage} />
           </Switch>
         </div>

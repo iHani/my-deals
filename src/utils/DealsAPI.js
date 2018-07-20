@@ -18,8 +18,8 @@ fetch(`${api}/deals`, { headers })
 .then(res => res.json());
 
 // POST
-export const auth = (user) => (
-  fetch(`${api}/auth`, {
+export const signup = (user) => (
+  fetch(`${api}/signup`, {
     method: 'POST',
     headers: {
       ...headers
@@ -32,6 +32,17 @@ export const auth = (user) => (
 export const checkAuthUser = () =>
 fetch(`${api}/auth/check`, { headers })
 .then(res => res.json());
+
+export const login = (user) => (
+  fetch(`${api}/login`, {
+    method: 'POST',
+    headers: {
+      ...headers
+    },
+    body: JSON.stringify({ ...user }),
+  })
+  .then(res => res.json())
+)
 
 // PUT
 export const logout = () =>
