@@ -9,7 +9,7 @@ const configureStore = () => {
   const store = createStore(
     combineReducers({
      deals: dealsReducer,
-     categories: categoriesReducer
+     categories: categoriesReducer,
     }),
     composeEnhancers(applyMiddleware(thunk))
   );

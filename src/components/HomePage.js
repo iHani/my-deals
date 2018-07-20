@@ -21,7 +21,6 @@ class HomePage extends Component {
 
   render() {
     const { selectedFilter } = this.props;
-
     return (
       <div>
         <Header />
@@ -38,6 +37,7 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  state,
   selectedFilter: state.categories.selectedFilter,
   deals: state.deals.list
 });
