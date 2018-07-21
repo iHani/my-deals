@@ -10,8 +10,10 @@ class CategoryFilters extends Component {
   }
 
   render() {
-    const { categories, deals } = this.props;
-    // console.log('CategoryFilters', this.props);
+    const { deals } = this.props;
+    // get set of unique categories
+    const categories = [...new Set(deals.map(({ dealCategory }) => dealCategory))]
+
     return (
       <div className="App">
         <h4 className="text-dark d-inline ml-2">Categories</h4>
@@ -30,9 +32,10 @@ class CategoryFilters extends Component {
 }
 
 const mapStateToProps = (state) => {
+  const deals = state.deals.list
+
   return {
-    deals: state.deals.list,
-    categories: state.categories.list,
+    deals,
   }
 };
 

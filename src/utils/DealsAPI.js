@@ -1,6 +1,6 @@
 const api = "http://localhost:3001"
 
-// Generate a unique token for storing your bookshelf data on the backend server.
+// Generate a unique token
 let token = localStorage.token
 if (!token) {
   token = localStorage.token = Math.random().toString(36).substr(-8)
@@ -8,7 +8,7 @@ if (!token) {
 
 const headers = {
   'Accept': 'application/json',
-  Authorization: token,
+  'Authorization': token,
   'Content-Type': 'application/json'
 }
 
@@ -17,7 +17,7 @@ export const getDeals = () =>
 fetch(`${api}/deals`, { headers })
 .then(res => res.json());
 
-// POST
+// POST signup
 export const signup = (user) => (
   fetch(`${api}/signup`, {
     method: 'POST',
@@ -29,10 +29,12 @@ export const signup = (user) => (
   .then(res => res.json())
 )
 
+// GET authenticated status of user by token
 export const checkAuthUser = () =>
 fetch(`${api}/auth/check`, { headers })
 .then(res => res.json());
 
+// POST login user
 export const login = (user) => (
   fetch(`${api}/login`, {
     method: 'POST',
@@ -44,7 +46,19 @@ export const login = (user) => (
   .then(res => res.json())
 )
 
-// PUT
+// PUT logout user
 export const logout = () =>
 fetch(`${api}/logout`, { headers })
 .then(res => res.json());
+
+// POST new deal
+export const createNewDeal = (deal) => (
+  fetch(`${api}/create-new-deal`, {
+    method: 'POST',
+    headers: {
+      ...headers
+    },
+    body: JSON.stringify({ ...deal }),
+  })
+  .then(res => res.json())
+)

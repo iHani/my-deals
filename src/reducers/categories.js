@@ -9,11 +9,13 @@ const initState = {
 }
 
 export default (state = initState, action) => {
-  const { deals, filter } = action;
+  const { filter } = action;
 
   switch (action.type) {
     case GET_CATEGORY_SET :
     // get unique set of categories
+    const categories = [...new Set(state.deals.list.map(({ dealCategory }) => dealCategory))]
+    console.log('GET_CATEGORY_SET state', state);
     const categories = [...new Set(deals.map(({ dealCategory }) => dealCategory))]
     return {
       ...state,

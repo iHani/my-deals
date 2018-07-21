@@ -1,19 +1,19 @@
 import * as DealsAPI from '../utils/DealsAPI';
-import { getCategorySet } from './categories';
+
 export const FETCHED_DEALS = 'FETCHED_DEALS';
 export const GET_CATEGORY_SET = 'GET_CATEGORY_SET';
 export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
 export const LOGOUT = 'LOGOUT';
+export const NEW_DEAL = 'NEW_DEAL';
 
-
-export const fetchDeals = () => (dispatch) => (
-  DealsAPI
-  .getDeals()
-  .then(deals => {
-    dispatch(fetchedDeals(deals));
-    dispatch(getCategorySet(deals));
-  })
-);
+// export const fetchDeals = () => (dispatch) => (
+//   DealsAPI
+//   .getDeals()
+//   .then(deals => {
+//     dispatch(fetchedDeals(deals));
+//     dispatch(getCategorySet(deals));
+//   })
+// );
 
 export const fetchedDeals = (list) => ({
   type: FETCHED_DEALS,
@@ -26,31 +26,30 @@ export const signup = (user) => (dispatch) => {
   .then(({ isAuthenticated }) => isAuthenticated && dispatch(userAuthenticated()))
 }
 
-export const userAuthenticated = () => ({
-  type: USER_AUTHENTICATED,
-});
-
-// export const login = (user) => (dispatch) => {
-//   return DealsAPI
-//   .login(user)
-//   .then(({ isAuthenticated }) => isAuthenticated && dispatch(userAuthenticated()))
-// }
+export const userAuthenticated = () => {
+  return ({
+    type: USER_AUTHENTICATED,
+  });
+}
 
 export const logout = () => (dispatch) => {
   return DealsAPI
   .logout()
-  .then(({ token }) => {
-    //the key where we save the token is named 'token' in localStorage
-    localStorage.removeItem('token')
-    dispatch(logoutUser())
-  })
+  .then(({ loggedOut }) => loggedOut && dispatch(logoutUser()))
 }
+
 export const logoutUser = () =>  ({
   type: LOGOUT,
 });
 
-export const checkAuthUser = (token) => (dispatch) => {
+// checking auth by the token that will be sent in the headers
+export const checkAuthUser = () => (dispatch) => {
   return DealsAPI
-  .checkAuthUser(token)
-  .then(({ isAuthenticated }) => isAuthenticated && dispatch(userAuthenticated()))
+  .checkAuthUser()
+  .then(({ isAuthenticated }) => isAuthenticated ? dispatch(userAuthenticated()) : dispatch(logoutUser()))
 }
+
+export const newDeal = (deal) => ({
+  type: NEW_DEAL,
+  deal
+});
