@@ -2,7 +2,8 @@ import {
   FETCHED_DEALS,
   USER_AUTHENTICATED,
   LOGOUT,
-  NEW_DEAL
+  NEW_DEAL,
+  DELETE_DEAL
 } from '../actions/deals';
 
 const initState = {
@@ -11,7 +12,7 @@ const initState = {
 }
 
 export default (state = initState, action) => {
-  const { list, deal } = action;
+  const { list, deal, id } = action;
   switch (action.type) {
     case FETCHED_DEALS :
     return {
@@ -33,16 +34,14 @@ export default (state = initState, action) => {
       ...state,
       list: [ ...state.list, deal ]
     };
-    case USER_AUTHENTICATED :
+    case DELETE_DEAL :
+    console.log('state.list', state.list.filter(({ dealId }) => dealId !== id));
     return {
       ...state,
-      isAuthenticated: true
+      list: state.list.filter(({ dealId }) => dealId !== id)
     };
-    case LOGOUT :
-    return {
-      ...state,
-      isAuthenticated: false
-    };    default:
+
+    default:
     return state;
   }
 };

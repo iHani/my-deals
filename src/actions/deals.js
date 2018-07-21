@@ -5,15 +5,7 @@ export const GET_CATEGORY_SET = 'GET_CATEGORY_SET';
 export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
 export const LOGOUT = 'LOGOUT';
 export const NEW_DEAL = 'NEW_DEAL';
-
-// export const fetchDeals = () => (dispatch) => (
-//   DealsAPI
-//   .getDeals()
-//   .then(deals => {
-//     dispatch(fetchedDeals(deals));
-//     dispatch(getCategorySet(deals));
-//   })
-// );
+export const DELETE_DEAL = 'DELETE_DEAL';
 
 export const fetchedDeals = (list) => ({
   type: FETCHED_DEALS,
@@ -48,6 +40,17 @@ export const checkAuthUser = () => (dispatch) => {
   .checkAuthUser()
   .then(({ isAuthenticated }) => isAuthenticated ? dispatch(userAuthenticated()) : dispatch(logoutUser()))
 }
+
+export const deleteDeal = (id) => (dispatch) => {
+  return DealsAPI
+  .deleteDeal(id)
+  .then(({ deleted }) => deleted && dispatch(dealDeleted(id)))
+}
+
+export const dealDeleted = (id) => ({
+  type: DELETE_DEAL,
+  id
+});
 
 export const newDeal = (deal) => ({
   type: NEW_DEAL,

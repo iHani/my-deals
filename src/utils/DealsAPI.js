@@ -62,3 +62,11 @@ export const createNewDeal = (deal) => (
   })
   .then(res => res.json())
 )
+
+export const deleteDeal = (id) => (
+  fetch(`${api}/deal/${id}`, {
+    method: 'DELETE',
+    headers: { ...headers }
+  })
+  .then(res => res.json())
+)

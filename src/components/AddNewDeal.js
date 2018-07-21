@@ -37,8 +37,11 @@ class AddNewDeal extends Component {
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   render () {
-    const { categories, dealPartner, dealPrice} = this.state;
-    const { isAuthenticated } = this.props;
+    const { dealPartner, dealPrice} = this.state;
+    const { isAuthenticated, deals } = this.props;
+    // get set of unique categories
+    const categories = [...new Set(deals.map(({ dealCategory }) => dealCategory))]
+
 
     if (!isAuthenticated) {
       return <NotAuthorized />
@@ -76,7 +79,7 @@ class AddNewDeal extends Component {
 }
 
 const mapStateToProps = ({ deals, categories }) => ({
-  deals,
+  deals: deals.list,
   isAuthenticated: deals.isAuthenticated,
   categories: categories.list,
  });
