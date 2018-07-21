@@ -10,13 +10,13 @@ This app was bootstrapped by [CRA](https://github.com/facebook/create-react-app)
 
 ## Get Started
 
-First, you need to run the server app. Please clone and run the server from [here](https://github.com/iHani/my-deals-server)
+ 1. Run the server app. Please clone and run the server from [here](https://github.com/iHani/my-deals-server)
 
-To install and start the API server, run the following npm (or yarn) commands in this directory:
+ 2. Install and start the front-end by cloning this repo, then run the following npm (or yarn) commands in this directory:
 
-`npm install`
+  `npm install`
 
-`npm start`
+  `npm start`
 
 The app should open up on http://localhost:3000
 
