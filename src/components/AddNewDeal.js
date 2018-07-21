@@ -30,7 +30,10 @@ class AddNewDeal extends Component {
     }
 
     createNewDeal(deal)
-    .then(() => this.props.newDeal(deal))
+    .then(() => {
+      this.props.newDeal(deal)
+      this.props.history.push("/");
+    })
     .catch(error => console.log('Error creating new deal:', error))
   }
 
