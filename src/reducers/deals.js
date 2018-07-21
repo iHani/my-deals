@@ -1,7 +1,8 @@
 import {
   FETCHED_DEALS,
   USER_AUTHENTICATED,
-  LOGOUT
+  LOGOUT,
+  NEW_DEAL
 } from '../actions/deals';
 
 const initState = {
@@ -10,7 +11,7 @@ const initState = {
 }
 
 export default (state = initState, action) => {
-  const { list } = action;
+  const { list, deal } = action;
   switch (action.type) {
     case FETCHED_DEALS :
     return {
@@ -26,7 +27,14 @@ export default (state = initState, action) => {
     return {
       ...state,
       isAuthenticated: false
-    };    default:
+    };
+    case NEW_DEAL :
+    return {
+      ...state,
+      list: [ ...state.list, deal ]
+    };
+
+    default:
     return state;
   }
 };

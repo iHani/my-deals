@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import FaPlus from 'react-icons/lib/fa/plus';
@@ -11,32 +11,32 @@ const Header = (props) => {
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="collapse navbar-collapse" id="navbarNavDropdown">
+      <div className="collapse navbar-collapse navbar-nav" id="navbarNavDropdown">
+        <span className="nav-item">
+          <Link className="nav-link" to="/">Home</Link>
+        </span>
+        <span className="nav-item">
+          <Link className="nav-link" to="/new-deal"><FaPlus/>New Deal</Link>
+        </span>
         {props.isAuthenticated &&
+          <span className="nav-item">
+            <Link className="nav-link" to="" onClick={() => props.logout()}>Logout</Link>
+          </span>
+        }
+        {!props.isAuthenticated &&
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="/new-deal">
-              <FaPlus/>New Deal
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="" onClick={() => props.logout()}>Logout</Link>
-          </li>
-        </ul>
-      }
-      {!props.isAuthenticated && <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link className="nav-link" to="/signup">Sign up</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/login">Login</Link>
-        </li>
-      </ul>}
-    </div>
-  </nav>
-);
+              <Link className="nav-link" to="/signup">Sign up</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/login">Login</Link>
+            </li>
+          </ul>
+        }
+      </div>
+    </nav>
+  );
 }
-
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.deals.isAuthenticated,

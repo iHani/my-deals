@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchDeals } from '../actions/deals';
 import Header from './Header';
 import DealsList from './DealsList'
-import CategoryFilters from './CategoryFilters'
+import CategoryFilters from './CategoryFilters';
 
 class HomePage extends Component {
 
-  componentDidMount () {
-    this.props.fetchDeals();
-  }
-
-  filterDealsBy = (category) => {
-    const deals = category === 'All' ? this.props.deals
-    : this.props.deals.filter(({ dealCategory }) => dealCategory === category);
-    return deals;
-  }
-
-  render() {
+  render () {
     const { selectedFilter } = this.props;
     return (
       <div>
@@ -26,7 +15,7 @@ class HomePage extends Component {
           <CategoryFilters />
           <h4 className="border-bottom border-gray pb-2 mb-0 mt-2 ml-2">{selectedFilter} Deals</h4>
           <div className="list-group list-group-flush">
-            <DealsList deals={this.filterDealsBy(selectedFilter)} />
+            <DealsList />
           </div>
         </div>
       </div>
@@ -35,13 +24,11 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  state,
   selectedFilter: state.categories.selectedFilter,
-  deals: state.deals.list
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchDeals: () => dispatch(fetchDeals()),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   fetchDeals: () => dispatch(fetchDeals()),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps)(HomePage);

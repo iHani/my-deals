@@ -4,18 +4,16 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  withRouter
 } from "react-router-dom";
 import { HomePage, NotFoundPage, AddNewDeal, Login, Signup } from '../components';
 import { checkAuthUser } from '../actions/deals';
 
-const token = localStorage.token || undefined
-
 class AppRouter extends Component {
+
   componentDidMount () {
-    // token &&
     this.props.checkAuthUser()
   }
+
   render () {
     return (
       <BrowserRouter>

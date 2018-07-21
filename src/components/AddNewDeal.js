@@ -1,32 +1,43 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
 import { connect } from 'react-redux';
+import { createNewDeal } from '../utils/DealsAPI';
+import { newDeal } from '../actions/deals'
 import Header from './Header';
 import NotAuthorized from './NotAuthorized';
 
 class AddNewDeal extends Component {
 
   state = {
-    category: '',
-    partner: '',
-    price: '',
+    categories: [],
+    dealCategory: '',
+    dealPartner: '',
+    dealPrice: '',
   }
 
-  handleCreateNewDeal (event) {
+  componentDidMount () {
+    this.setState({ categories: this.props.categories })
+  }
+
+  handleCreateNewDeal = async (event) => {
     event.preventDefault();
-    const { category, partner, price } = this.state;
+    const { dealCategory, dealPartner, dealPrice } = this.state;
     const deal = {
-      category,
-      partner,
-      price,
+      dealId: uuid(),
+      dealCategory,
+      dealPartner,
+      dealPrice,
     }
-    console.log('deal added:', deal);
+
+    createNewDeal(deal)
+    .then(() => this.props.newDeal(deal))
+    .catch(error => console.log('Error creating new deal:', error))
   }
 
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-
-  render() {
-    const { category, partner, price } = this.state;
+  render () {
+    const { categories, dealPartner, dealPrice} = this.state;
     const { isAuthenticated } = this.props;
 
     if (!isAuthenticated) {
@@ -41,18 +52,18 @@ class AddNewDeal extends Component {
           <form onSubmit={this.handleCreateNewDeal.bind(this)}>
             <div className="form-group">
               <label htmlFor="categoryList">Category</label>
-              <select defaultValue="initial" name="category" className="form-control" id="categoryList" onChange={this.handleInputChange}>
-                <option value="initial" disabled hidden>Select category</option>
-                {this.props.categories.map(category => <option key={category} value={category}>{category}</option>)}
+              <select defaultValue="initial" name="dealCategory" className="form-control" id="categoryList" onChange={this.handleInputChange}>
+                <option value="initial" hidden>Select category</option>
+                {categories.map(category => <option key={category} value={category}>{category}</option>)}
               </select>
             </div>
             <div className="form-group">
               <label>Partner</label>
-              <input value={partner} onChange={this.handleInputChange} name="partner" type="text" className="form-control"/>
+              <input value={dealPartner} onChange={this.handleInputChange} name="dealPartner" type="text" className="form-control"/>
             </div>
             <div className="form-group">
               <label>Price</label>
-              <input value={price} onChange={this.handleInputChange} name="price" type="number" className="form-control"/>
+              <input value={dealPrice} onChange={this.handleInputChange} name="dealPrice" type="number" className="form-control"/>
             </div>
             <div className="form-group text-center">
               <button type="submit" className="btn btn-info width-200 m-2">Create</button>
@@ -64,11 +75,14 @@ class AddNewDeal extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  state,
-  isAuthenticated: state.deals.isAuthenticated,
-  categories: state.categories.list,
+const mapStateToProps = ({ deals, categories }) => ({
+  deals,
+  isAuthenticated: deals.isAuthenticated,
+  categories: categories.list,
  });
 
+ const mapDispatchToProps = (dispatch) => ({
+   newDeal: (deal) => dispatch(newDeal(deal))
+ })
 
-export default connect(mapStateToProps)(AddNewDeal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewDeal);
