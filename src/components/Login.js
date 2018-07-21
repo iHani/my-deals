@@ -29,20 +29,21 @@ class Login extends Component {
   };
 
   handleLogin = async (event) => {
-    const self = this;
     event.preventDefault();
+    
     const user = {
-      mobile: self.state.mobile,
-      password: self.state.password,
+      mobile: this.state.mobile,
+      password: this.state.password,
     }
+
     login(user)
     .then(({ isAuthenticated }) => {
       if (isAuthenticated) {
         this.props.userAuthenticated()
-        self.props.history.push("/");
+        this.props.history.push("/");
       } else {
         this.props.logout()
-        self.setState({ showMessage: true })
+        this.setState({ showMessage: true })
       }
     })
     .catch(error => console.log('Error login:', error))

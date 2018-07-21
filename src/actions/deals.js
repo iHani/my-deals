@@ -35,7 +35,7 @@ export const userAuthenticated = () => {
 export const logout = () => (dispatch) => {
   return DealsAPI
   .logout()
-  .then(() => dispatch(logoutUser()))
+  .then(({ loggedOut }) => loggedOut && dispatch(logoutUser()))
 }
 
 export const logoutUser = () =>  ({
@@ -46,10 +46,7 @@ export const logoutUser = () =>  ({
 export const checkAuthUser = () => (dispatch) => {
   return DealsAPI
   .checkAuthUser()
-  .then(({ isAuthenticated }) => {
-    console.log(isAuthenticated);
-    isAuthenticated ? dispatch(userAuthenticated()) : dispatch(logoutUser())
-  })
+  .then(({ isAuthenticated }) => isAuthenticated ? dispatch(userAuthenticated()) : dispatch(logoutUser()))
 }
 
 export const newDeal = (deal) => ({
