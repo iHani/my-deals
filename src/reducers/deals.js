@@ -38,7 +38,6 @@ export default (state = initState, action) => {
     case EDIT_DEAL :
     deal.dealId = id
     const editedList = state.list.filter(d => d.dealId !== id).concat(deal)
-    // console.log('id deal', state.list.filter(d => d.dealId !== id).concat(deal));
     return {
       ...state,
       list: editedList
@@ -47,7 +46,7 @@ export default (state = initState, action) => {
     case DELETE_DEAL :
     return {
       ...state,
-      // list: state.list.filter(({ dealId }) => dealId !== id)
+      list: state.list.filter(({ dealId }) => dealId !== id)
     };
 
     default:
