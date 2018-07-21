@@ -1,7 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Header from './Header';
 
 const NotFoundPage = () => (
-  <p>Not Found Page</p>
+  <div>
+    <Header />
+    <div className="offset-sm-3 col-sm-6 py-4">
+      <h3>404!</h3>
+      <p>Page not found.</p>
+    </div>
+  </div>
 );
 
 export default NotFoundPage;

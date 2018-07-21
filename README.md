@@ -4,7 +4,7 @@ Application for creating and managing deals, with fake user registration system.
 
 ## About
 
-This app was bootstrapped by [CRA](https://github.com/facebook/create-react-app), and used [Redux](https://redux.js.org/) for state management, [Reac Router 4](https://reacttraining.com) for navigation logic, and [Redux Thunk](https://www.npmjs.com/package/redux-thunk) for asynchronous dispatching.
+This app was bootstrapped by [CRA](https://github.com/facebook/create-react-app), and used [Redux](https://redux.js.org/) for state management, [Reac Router 4](https://reacttraining.com) for navigation logic, and [Redux Thunk](https://www.npmjs.com/package/redux-thunk) for asynchronous dispatching. The UI was built with [Bootstrap 4](https://getbootstrap.com/)
 
  *This app is part of Bahr's interview only, and not ready for production*
 
