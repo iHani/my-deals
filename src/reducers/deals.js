@@ -2,7 +2,9 @@ import {
   FETCHED_DEALS,
   USER_AUTHENTICATED,
   LOGOUT,
-  NEW_DEAL
+  NEW_DEAL,
+  EDIT_DEAL,
+  DELETE_DEAL
 } from '../actions/deals';
 
 const initState = {
@@ -11,7 +13,7 @@ const initState = {
 }
 
 export default (state = initState, action) => {
-  const { list, deal } = action;
+  const { list, deal, id } = action;
   switch (action.type) {
     case FETCHED_DEALS :
     return {
@@ -33,16 +35,21 @@ export default (state = initState, action) => {
       ...state,
       list: [ ...state.list, deal ]
     };
-    case USER_AUTHENTICATED :
+    case EDIT_DEAL :
+    deal.dealId = id
+    const editedList = state.list.filter(d => d.dealId !== id).concat(deal)
     return {
       ...state,
-      isAuthenticated: true
+      list: editedList
     };
-    case LOGOUT :
+
+    case DELETE_DEAL :
     return {
       ...state,
-      isAuthenticated: false
-    };    default:
+      list: state.list.filter(({ dealId }) => dealId !== id)
+    };
+
+    default:
     return state;
   }
 };

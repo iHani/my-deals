@@ -5,7 +5,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { HomePage, NotFoundPage, AddNewDeal, Login, Signup } from '../components';
+import { HomePage, NotFoundPage, AddNewDeal, Login, Signup, EditDeal } from '../components';
 import { checkAuthUser } from '../actions/deals';
 
 class AppRouter extends Component {
@@ -21,6 +21,7 @@ class AppRouter extends Component {
           <Switch>
             <Route exact path='/' component={HomePage} />
             <Route path='/new-deal' component={AddNewDeal} />
+            <Route exact path='/edit/deal/:id' component={EditDeal} />
             <Route path='/signup' component={Signup} />
             <Route path='/login' component={Login} />
             <Route component={NotFoundPage} />

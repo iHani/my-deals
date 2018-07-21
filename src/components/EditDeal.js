@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 import { connect } from 'react-redux';
-import { createNewDeal } from '../utils/DealsAPI';
-import { newDeal } from '../actions/deals';
+import { editDeal } from '../actions/deals';
 import Header from './Header';
 import NotAuthorized from './NotAuthorized';
 
@@ -16,32 +14,30 @@ class AddNewDeal extends Component {
   }
 
   componentDidMount () {
-    this.setState({ categories: this.props.categories })
+    const deal = this.props.deals.find(deal => deal.dealId === this.props.match.params.id)
+    this.setState({ ...deal })
   }
 
-  handleCreateNewDeal = async (event) => {
+  handleEditDeal = (event) => {
     event.preventDefault();
-    const { dealCategory, dealPartner, dealPrice } = this.state;
+    const { dealId, dealCategory, dealPartner, dealPrice } = this.state;
     const deal = {
-      dealId: uuid(),
       dealCategory,
       dealPartner,
       dealPrice,
     }
 
-    createNewDeal(deal)
-    .then(() => this.props.newDeal(deal))
-    .catch(error => console.log('Error creating new deal:', error))
+    this.props.editDeal(dealId, deal)
+    this.props.history.push("/");
   }
 
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   render () {
-    const { dealPartner, dealPrice} = this.state;
+    const { dealCategory, dealPartner, dealPrice } = this.state;
     const { isAuthenticated, deals } = this.props;
     // get set of unique categories from existing deals
     const categories = [...new Set(deals.map(({ dealCategory }) => dealCategory))]
-
 
     if (!isAuthenticated) {
       return <NotAuthorized />
@@ -51,12 +47,11 @@ class AddNewDeal extends Component {
       <div>
         <Header />
         <div className="offset-sm-3 col-sm-6 py-4">
-          <h3>Create New Deal</h3>
-          <form onSubmit={this.handleCreateNewDeal.bind(this)}>
+          <h3>Edit Deal</h3>
+          <form onSubmit={this.handleEditDeal.bind(this)}>
             <div className="form-group">
               <label htmlFor="categoryList">Category</label>
-              <select defaultValue="initial" name="dealCategory" className="form-control" id="categoryList" onChange={this.handleInputChange}>
-                <option value="initial" hidden>Select category</option>
+              <select value={dealCategory} name="dealCategory" className="form-control" id="categoryList" onChange={this.handleInputChange}>
                 {categories.map(category => <option key={category} value={category}>{category}</option>)}
               </select>
             </div>
@@ -69,7 +64,7 @@ class AddNewDeal extends Component {
               <input value={dealPrice} onChange={this.handleInputChange} name="dealPrice" type="number" className="form-control"/>
             </div>
             <div className="form-group text-center">
-              <button type="submit" className="btn btn-info width-200 m-2">Create</button>
+              <button type="submit" className="btn btn-info width-200 m-2">Save changes</button>
             </div>
           </form>
         </div>
@@ -82,10 +77,10 @@ const mapStateToProps = ({ deals, categories }) => ({
   deals: deals.list,
   isAuthenticated: deals.isAuthenticated,
   categories: categories.list,
- });
+});
 
- const mapDispatchToProps = (dispatch) => ({
-   newDeal: (deal) => dispatch(newDeal(deal))
- });
+const mapDispatchToProps = (dispatch) => ({
+  editDeal: (id, deal) => dispatch(editDeal(id, deal))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewDeal);

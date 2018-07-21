@@ -21,9 +21,7 @@ fetch(`${api}/deals`, { headers })
 export const signup = (user) => (
   fetch(`${api}/signup`, {
     method: 'POST',
-    headers: {
-      ...headers
-    },
+    headers: { ...headers },
     body: JSON.stringify({ ...user }),
   })
   .then(res => res.json())
@@ -38,9 +36,7 @@ fetch(`${api}/auth/check`, { headers })
 export const login = (user) => (
   fetch(`${api}/login`, {
     method: 'POST',
-    headers: {
-      ...headers
-    },
+    headers: { ...headers },
     body: JSON.stringify({ ...user }),
   })
   .then(res => res.json())
@@ -55,10 +51,28 @@ fetch(`${api}/logout`, { headers })
 export const createNewDeal = (deal) => (
   fetch(`${api}/create-new-deal`, {
     method: 'POST',
-    headers: {
-      ...headers
-    },
+    headers: { ...headers },
     body: JSON.stringify({ ...deal }),
+  })
+  .then(res => res.json())
+)
+
+// PUT edit deal
+export const editDeal = (id, deal) => {
+  return (
+  fetch(`${api}/deal/${id}`, {
+    method: 'PUT',
+    headers: { ...headers },
+    body: JSON.stringify({ ...deal }),
+  })
+  .then(res => res.json())
+)}
+
+// DELETE deal
+export const deleteDeal = (id) => (
+  fetch(`${api}/deal/${id}`, {
+    method: 'DELETE',
+    headers: { ...headers }
   })
   .then(res => res.json())
 )
