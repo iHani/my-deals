@@ -33,8 +33,16 @@ export default (state = initState, action) => {
       ...state,
       list: [ ...state.list, deal ]
     };
-
-    default:
+    case USER_AUTHENTICATED :
+    return {
+      ...state,
+      isAuthenticated: true
+    };
+    case LOGOUT :
+    return {
+      ...state,
+      isAuthenticated: false
+    };    default:
     return state;
   }
 };

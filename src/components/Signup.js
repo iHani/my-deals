@@ -18,6 +18,7 @@ class Signup extends Component {
         mobile: this.state.mobile,
         password: this.state.password,
       }
+
       const authenticate = await this.props.signup(user);
       authenticate && this.props.history.push("/");
     } catch (error) {
@@ -29,7 +30,7 @@ class Signup extends Component {
 
   handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-  render() {
+render() {
     return (
       <div>
         <Header />
