@@ -9,6 +9,9 @@ This app was bootstrapped by [CRA](https://github.com/facebook/create-react-app)
  *This app is part of Bahr's interview only, and not ready for production*
 
 ## Get Started
+
+First, you need to run the server app. Please clone and run the server from [here](https://github.com/iHani/my-deals-server)
+
 To install and start the API server, run the following npm (or yarn) commands in this directory:
 
 `npm install`
