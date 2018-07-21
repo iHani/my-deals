@@ -3,6 +3,7 @@ import {
   USER_AUTHENTICATED,
   LOGOUT,
   NEW_DEAL,
+  EDIT_DEAL,
   DELETE_DEAL
 } from '../actions/deals';
 
@@ -34,11 +35,19 @@ export default (state = initState, action) => {
       ...state,
       list: [ ...state.list, deal ]
     };
-    case DELETE_DEAL :
-    console.log('state.list', state.list.filter(({ dealId }) => dealId !== id));
+    case EDIT_DEAL :
+    deal.dealId = id
+    const editedList = state.list.filter(d => d.dealId !== id).concat(deal)
+    // console.log('id deal', state.list.filter(d => d.dealId !== id).concat(deal));
     return {
       ...state,
-      list: state.list.filter(({ dealId }) => dealId !== id)
+      list: editedList
+    };
+
+    case DELETE_DEAL :
+    return {
+      ...state,
+      // list: state.list.filter(({ dealId }) => dealId !== id)
     };
 
     default:

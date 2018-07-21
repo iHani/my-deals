@@ -5,6 +5,7 @@ export const GET_CATEGORY_SET = 'GET_CATEGORY_SET';
 export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
 export const LOGOUT = 'LOGOUT';
 export const NEW_DEAL = 'NEW_DEAL';
+export const EDIT_DEAL = 'EDIT_DEAL';
 export const DELETE_DEAL = 'DELETE_DEAL';
 
 export const fetchedDeals = (list) => ({
@@ -46,6 +47,18 @@ export const deleteDeal = (id) => (dispatch) => {
   .deleteDeal(id)
   .then(({ deleted }) => deleted && dispatch(dealDeleted(id)))
 }
+
+export const editDeal = (id, deal) => (dispatch) => {
+  return DealsAPI
+  .editDeal(id, deal)
+  .then(({ edited }) => edited && dispatch(dealEdited(id, deal)))
+}
+
+export const dealEdited = (id, deal) => ({
+  type: EDIT_DEAL,
+  id,
+  deal
+});
 
 export const dealDeleted = (id) => ({
   type: DELETE_DEAL,
