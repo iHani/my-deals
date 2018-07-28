@@ -38,6 +38,10 @@ To create, edit, or delete a deal you need to be authorized, to be authorized yo
  * mobile: a
  * passwoed: a
 
+### Screenshot
+
+![](screenshot.png)
+
 ## Licence
 
 MIT
