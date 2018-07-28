@@ -40,7 +40,7 @@ To create, edit, or delete a deal you need to be authorized, to be authorized yo
 
 ### Screenshot
 
-![](screenshot.png)
+![](screenshot.jpg)
 
 ## Licence
 
